@@ -1,0 +1,23 @@
+{
+    "name": "breeze2/slumen-xhgui-collector",
+    "description": "an xhgui collector in slumen",
+    "type": "library",
+    "license": "MIT",
+    "version": "0.1.0",
+    "authors": [
+        {
+            "name": "Breeze",
+            "email": "805511939@qq.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "alcaeus/mongo-php-adapter": "^1.1",
+        "perftools/xhgui-collector": "^1.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "BL\\Slumen\\": "src/"
+        }
+    }
+}
