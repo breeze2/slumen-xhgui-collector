@@ -28,12 +28,12 @@ class Collector
         $uri    = $this->uri;
         $get    = $this->get;
         $data   = [];
-        $time   = array_key_exists('request_time', $server)
-        ? $server['request_time']
+        $time   = array_key_exists('REQUEST_TIME', $server)
+        ? $server['REQUEST_TIME']
         : time();
 
-        $delimiter        = (strpos($server['request_time_float'], ',') !== false) ? ',' : '.';
-        $requestTimeFloat = explode($delimiter, $server['request_time_float']);
+        $delimiter        = (strpos($server['REQUEST_TIME_FLOAT'], ',') !== false) ? ',' : '.';
+        $requestTimeFloat = explode($delimiter, $server['REQUEST_TIME_FLOAT']);
         if (!isset($requestTimeFloat[1])) {
             $requestTimeFloat[1] = 0;
         }
@@ -105,6 +105,23 @@ class Collector
         $this->uri    = $uri;
         $this->get    = $get;
         $this->server = $server;
+        $this->serverInfoToUpper();
+    }
+
+    public function serverInfoToUpper()
+    {
+        $SERVER = [];
+        foreach ($this->server as $key => $value) {
+            $SERVER[$this->stringToUpper($key)] = $value;
+        }
+        $this->server = $SERVER;
+    }
+
+    public function stringToUpper($subject)
+    {
+        static $search  = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '-'];
+        static $replace = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '_'];
+        return str_replace($search, $replace, $subject);
     }
 
 }
